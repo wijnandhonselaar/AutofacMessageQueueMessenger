@@ -22,18 +22,17 @@ namespace MessageQueueMessenger
             // Execute function that uses the Autoinjected classes
             WriteDate();
             
-            //
+            // Start the messenger
             Console.WriteLine("Enter your name");
             var name = Console.ReadLine();
             Console.WriteLine("Connecting to message bus...");
 
             var busControl = ConfigureBus(name);
             busControl.Start();
-
             do
             {
                 Console.WriteLine("Enter message (or quit to exit)");
-                Console.Write("> ");
+                Console.Write(name + " - ");
                 string value = Console.ReadLine();
 
                 if ("quit".Equals(value, StringComparison.OrdinalIgnoreCase))
