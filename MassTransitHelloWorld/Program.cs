@@ -98,7 +98,9 @@ namespace MessageQueueMessenger
                     h.Username("rabbitmq");
                     h.Password("rabbitmq");
                 });
+
                 // Setup listener
+                // Each messenger gets its own queue, events can only be consumed once from a queue.
                 cfg.ReceiveEndpoint(host, "event_queue_" + name, e =>
                 {
                     // Call the Event Consumer
