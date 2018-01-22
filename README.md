@@ -1,5 +1,5 @@
 # AutofacMessageQueueMessenger
-Messenger that uses autofac and RabbitMQ Event Queue
+Messenger that uses autofac and RabbitMQ Event Queue with Masstransit Framework
 
 ## Instructions
  1. Install Docker
