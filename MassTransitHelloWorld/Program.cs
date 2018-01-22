@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Autofac;
 using HelloServiceNet;
 using MassTransit;
+using MassTransit.Util.Caching;
 using IContainer = Autofac.IContainer;
 
 namespace MessageQueueMessenger
@@ -9,8 +11,11 @@ namespace MessageQueueMessenger
     class Program
     {
         private static IContainer Container { get; set; }
+        private static IBusControl BusControl { get; set; }
+
         static void Main(string[] args)
         {
+            string name;
             // Using Autofac to autoinject classes
             var builder = new ContainerBuilder();
             // Register interface for autoinjection when ConsoleOuput is instantiated.
@@ -22,41 +27,51 @@ namespace MessageQueueMessenger
             // Execute function that uses the Autoinjected classes
             WriteDate();
 
-            // Start the messenger
-            Console.WriteLine("Enter RabbitMQ Server IPAddress like so: 127.0.0.1");
-            var address = Console.ReadLine();
-            Console.WriteLine("Enter your name");
-            var name = Console.ReadLine();
-            Console.WriteLine("Connecting to message bus...");
+            // Connect to the RabbitMQ server
+            do
+            {
+                Console.WriteLine("Enter RabbitMQ Server IPAddress like so: 127.0.0.1");
+                var address = Console.ReadLine();
+                Console.WriteLine("Enter your name");
+                name = Console.ReadLine();
+                Console.WriteLine("Connecting to message bus...");
+                BusControl = ConfigureBus(name, address);
+                try
+                {
+                    BusControl.Start();
+                    // Success! So break out of the loop.
+                    break;
+                }
+                catch { Console.WriteLine("Error connecting to the RabbitMQ server on given IP, please try again!");}
 
-            var busControl = ConfigureBus(name, address);
-            busControl.Start();
+            } while (true);
+            // Start the messenger
             Console.WriteLine("Enter message (or quit to exit)");
             do
             {
                 Console.Write(name + " - ");
-                var value = Console.ReadLine();
+                var message = Console.ReadLine();
 
-                if ("quit".Equals(value, StringComparison.OrdinalIgnoreCase))
+                if ("quit".Equals(message, StringComparison.OrdinalIgnoreCase))
                 {
-                    busControl.Publish<IMessage>(new
-                    {
-                        Name = name,
-                        Message = "<< Disconnected >>"
-                    });
-                
+                    Publish(name, "<< Disconnected >>");
                     break;
                 }
 
-                busControl.Publish<IMessage>(new
-                {
-                    Name = name,
-                    Message = value
-                });
+                Publish(name, message);
             }
             while (true);
 
-            busControl.StopAsync(TimeSpan.FromMilliseconds(5000));
+            BusControl.Stop();
+        }
+
+        private static void Publish(string name, string message)
+        {
+            BusControl.Publish<IMessage>(new
+            {
+                Name = name,
+                Message = message
+            });
         }
 
         /**
@@ -92,6 +107,9 @@ namespace MessageQueueMessenger
                     // Call the Event Consumer
                     e.Handler<IMessage>(Listener.Consume);
                 });
+                cfg.AutoDelete = true;
+                cfg.Durable = false;
+                cfg.PurgeOnStartup = true;
             });
         }
     }
