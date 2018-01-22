@@ -21,19 +21,21 @@ namespace MessageQueueMessenger
             Container = builder.Build();
             // Execute function that uses the Autoinjected classes
             WriteDate();
-            
+
             // Start the messenger
+            Console.WriteLine("Enter RabbitMQ Server IPAddress like so: 127.0.0.1");
+            var address = Console.ReadLine();
             Console.WriteLine("Enter your name");
             var name = Console.ReadLine();
             Console.WriteLine("Connecting to message bus...");
 
-            var busControl = ConfigureBus(name);
+            var busControl = ConfigureBus(name, address);
             busControl.Start();
+            Console.WriteLine("Enter message (or quit to exit)");
             do
             {
-                Console.WriteLine("Enter message (or quit to exit)");
                 Console.Write(name + " - ");
-                string value = Console.ReadLine();
+                var value = Console.ReadLine();
 
                 if ("quit".Equals(value, StringComparison.OrdinalIgnoreCase))
                 {
@@ -72,14 +74,14 @@ namespace MessageQueueMessenger
         /**
          * Configure RabbitMQ Event Queue
          */
-        private static IBusControl ConfigureBus(string name)
+        private static IBusControl ConfigureBus(string name, string address)
         {
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
                 // Set sender name, to filter own messages.
                 Listener.Name = name;
-                // Configure connection to RabbitMQ host
-                var host = cfg.Host(new Uri("rabbitmq://192.168.10.193"), h =>
+                // Configure connection to RabbitMQ host 192.168.10.193
+                var host = cfg.Host(new Uri("rabbitmq://" + address), h =>
                 {
                     h.Username("rabbitmq");
                     h.Password("rabbitmq");
