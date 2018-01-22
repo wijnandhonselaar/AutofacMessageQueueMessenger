@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using Autofac;
 using HelloServiceNet;
 using MassTransit;
-using MassTransit.Util.Caching;
-using IContainer = Autofac.IContainer;
 
 namespace MessageQueueMessenger
 {
