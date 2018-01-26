@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueueMessenger", "MassTransitHelloWorld\MessageQueueMessenger.csproj", "{DB8D78FF-580A-4B93-B929-387764DF6A30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueueMessenger", "MessageQueueMessenger\MessageQueueMessenger.csproj", "{DB8D78FF-580A-4B93-B929-387764DF6A30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloServiceNet", "HelloServiceNet\HelloServiceNet.csproj", "{D273F5B0-A4A7-4A9E-91D3-B834A4D464EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{D273F5B0-A4A7-4A9E-91D3-B834A4D464EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

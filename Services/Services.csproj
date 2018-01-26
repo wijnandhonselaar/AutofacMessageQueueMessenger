@@ -7,8 +7,8 @@
     <ProjectGuid>{D273F5B0-A4A7-4A9E-91D3-B834A4D464EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HelloServiceNet</RootNamespace>
-    <AssemblyName>HelloServiceNet</AssemblyName>
+    <RootNamespace>Services</RootNamespace>
+    <AssemblyName>Services</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -79,9 +79,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HelloServiceNet\HelloServiceNet.csproj">
+    <ProjectReference Include="..\Services\Services.csproj">
       <Project>{D273F5B0-A4A7-4A9E-91D3-B834A4D464EE}</Project>
-      <Name>HelloServiceNet</Name>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
