@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac;
-using HelloServiceNet;
+using Services;
 using MassTransit;
 
 namespace MessageQueueMessenger

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using MassTransit;
 
-namespace HelloServiceNet
+namespace Services
 {
     public interface IOutput
     {
@@ -59,7 +59,12 @@ namespace HelloServiceNet
         public static async Task Consume(ConsumeContext<IMessage> ctx)
         {
             if (ShowMessage(ctx.Message))
+            {
+                ClearCurrentConsoleLine();
                 await Console.Out.WriteLineAsync(ctx.Message.Name + " - " + ctx.Message.Message);
+                Console.Write(Name + " - ");
+            }
+                
         }
 
         /**
@@ -67,7 +72,14 @@ namespace HelloServiceNet
          */
         private static bool ShowMessage(IMessage m)
         {
-            return Name != m.Name;
+            return true;// Name != m.Name;
+        }
+        public static void ClearCurrentConsoleLine()
+        {
+            int currentLineCursor = Console.CursorTop;
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, currentLineCursor);
         }
     }
 }
