@@ -1,6 +1,11 @@
 # AutofacMessageQueueMessenger
 Messenger that uses autofac and RabbitMQ Event Queue with Masstransit Framework
 
+## Version 1.0
+### Features
+ - Sending messages via a Message Bus
+ - Client is .NET Framework 4.6.2 based
+
 ## Instructions
  1. Install Docker
  2. Run Docker
