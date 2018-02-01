@@ -103,7 +103,7 @@ namespace MessageQueueMessenger
                 // Each messenger gets its own queue, events can only be consumed once from a queue.
                 cfg.ReceiveEndpoint(host, "message_queue_" + name, e =>
                 {
-                    // Call the Event Consumer
+                    // Setup a listener for Processed Messages
                     e.Handler<IProcessedMessage>(Listener.Consume);
                 });
             });
