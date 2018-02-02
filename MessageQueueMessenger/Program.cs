@@ -2,6 +2,7 @@
 using Autofac;
 using Services;
 using MassTransit;
+using MessengerPackage;
 
 namespace MessageQueueMessenger
 {
@@ -62,15 +63,6 @@ namespace MessageQueueMessenger
             BusControl.Stop();
         }
 
-        private static void Publish(string name, string message)
-        {
-            BusControl.Publish<IMessage>(new
-            {
-                Name = name,
-                Message = message
-            });
-        }
-
         /**
          *  Write current date to the console.
          */
@@ -83,6 +75,15 @@ namespace MessageQueueMessenger
             }
         }
 
+        private static void Publish(string name, string message)
+        {
+            BusControl.Publish<IUnprocessedMessage>(new
+            {
+                Name = name,
+                Message = message
+            });
+        }
+
         /**
          * Configure RabbitMQ Event Queue
          */
@@ -90,7 +91,6 @@ namespace MessageQueueMessenger
         {
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                // Set sender name, to filter own messages.
                 Listener.Name = name;
                 // Configure connection to RabbitMQ host 192.168.10.193
                 var host = cfg.Host(new Uri("rabbitmq://" + address), h =>
@@ -101,14 +101,11 @@ namespace MessageQueueMessenger
 
                 // Setup listener
                 // Each messenger gets its own queue, events can only be consumed once from a queue.
-                cfg.ReceiveEndpoint(host, "event_queue_" + name, e =>
+                cfg.ReceiveEndpoint(host, "message_queue_" + name, e =>
                 {
-                    // Call the Event Consumer
-                    e.Handler<IMessage>(Listener.Consume);
+                    // Setup a listener for Processed Messages
+                    e.Handler<IProcessedMessage>(Listener.Consume);
                 });
-                cfg.AutoDelete = true;
-                cfg.Durable = false;
-                cfg.PurgeOnStartup = true;
             });
         }
     }
