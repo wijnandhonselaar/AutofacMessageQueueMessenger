@@ -16,17 +16,11 @@ namespace MessageProcessor
          */
         public static async Task Consume(ConsumeContext<IMessage> ctx)
         {
-//            if (Terminated(ctx.Message))
-//            {
-//                MessageProcessor.BusControl.StopAsync();
-//            }
-//            else
-//            {
-            Console.WriteLine($"{ctx.Message.Name}: {ctx.Message.Message}");
+            Console.WriteLine($"Received: {ctx.Message.Name}: {ctx.Message.Message}");
             IProcessedMessage message = new ProcessedMessage(ctx.Message.Name, ctx.Message.Message);
-            Console.WriteLine($"{message.Name}: {message.Message}");
+            Thread.Sleep(1000);
+            Console.WriteLine($"Sent: {message.Name}: {message.Message}");
             await MessageProcessor.BusControl.Publish(message);
-//            }
         }
 
         private static bool Terminated(IMessage m)
