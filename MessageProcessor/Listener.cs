@@ -21,11 +21,6 @@ namespace MessageProcessor
             Console.WriteLine($"Sent: {message.Name}: {message.Message}");
             await MessageProcessor.BusControl.Publish(message);
         }
-
-        private static bool Terminated(IMessage m)
-        {
-            return m.Message.Equals("close session", StringComparison.InvariantCultureIgnoreCase);
-        }
     }
 
     public class ProcessedMessage : IProcessedMessage
