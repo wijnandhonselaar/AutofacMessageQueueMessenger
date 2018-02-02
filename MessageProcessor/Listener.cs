@@ -18,7 +18,6 @@ namespace MessageProcessor
         {
             Console.WriteLine($"Received: {ctx.Message.Name}: {ctx.Message.Message}");
             IProcessedMessage message = new ProcessedMessage(ctx.Message.Name, ctx.Message.Message);
-            Thread.Sleep(1000);
             Console.WriteLine($"Sent: {message.Name}: {message.Message}");
             await MessageProcessor.BusControl.Publish(message);
         }
