@@ -14,6 +14,7 @@ namespace MessageQueueMessenger
         static void Main(string[] args)
         {
             string name;
+            string username;
             // Using Autofac to autoinject classes
             var builder = new ContainerBuilder();
             // Register interface for autoinjection when ConsoleOuput is instantiated.
@@ -30,10 +31,12 @@ namespace MessageQueueMessenger
             {
                 Console.WriteLine("Enter RabbitMQ Server IPAddress like so: 127.0.0.1");
                 var address = Console.ReadLine();
+                Console.WriteLine("Enter RabbitMQ Server username");
+                username = Console.ReadLine();
                 Console.WriteLine("Enter your name");
                 name = Console.ReadLine();
                 Console.WriteLine("Connecting to message bus...");
-                BusControl = ConfigureBus(name, address);
+                BusControl = ConfigureBus(username, name, address);
                 try
                 {
                     BusControl.Start();
@@ -87,7 +90,7 @@ namespace MessageQueueMessenger
         /**
          * Configure RabbitMQ Event Queue
          */
-        private static IBusControl ConfigureBus(string name, string address)
+        private static IBusControl ConfigureBus(string username, string name, string address)
         {
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
@@ -95,8 +98,8 @@ namespace MessageQueueMessenger
                 // Configure connection to RabbitMQ host 192.168.10.193
                 var host = cfg.Host(new Uri("rabbitmq://" + address), h =>
                 {
-                    h.Username("rabbitmq");
-                    h.Password("rabbitmq");
+                    h.Username(username);
+                    h.Password(username);
                 });
 
                 // Setup listener
