@@ -7,6 +7,6 @@ RUN ["dotnet", "build"]
 
 FROM microsoft/dotnet-framework:4.7.1
 WORKDIR /app
-#COPY /app ./
+COPY bin/Release .
 
 ENTRYPOINT ["MessageProcessor.exe"]
