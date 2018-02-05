@@ -18,13 +18,15 @@ Messenger that uses autofac and RabbitMQ Event Queue with the Masstransit Framew
  3. Set docker in Windows Container mode
  4. Open Windows Powershell (as Administrator)
  5. CD to project folder
- 6. Execute command: "docker run -d -e RABBITMQ_ERLANG_COOKIE='SWQOKODSQALRPCLNMEQG' -p 15672:15672 -p 5672:5672 micdenny/rabbitmq-windows"
- 7. Execute command : "docker run -d whonselaar/messageprocessor:v1.0.1 localhost rabbitmq rabbitmq"
- 8. Enter the RabbitMQ Server IP (localhost in this case)
- 9. Enter your username
- 10. Start messaging!
+ 6. Execute command: "docker run -d --name rabbitmq -e RABBITMQ_ERLANG_COOKIE='SWQOKODSQALRPCLNMEQG' -p 15672:15672 -p 5672:5672 micdenny/rabbitmq-windows"
+ 7. Get the containers IP, execute: docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' rabbitmq
+ 8. Execute command : "docker run -d whonselaar/messageprocessor:v1.0.1 IP_FROM_STEP_7 guest guest"
+ 9. Enter the RabbitMQ Server IP (localhost in this case)
+ 10. Enter the username for rabbitmq, guest in this case
+ 11. Enter your username
+ 12. Start messaging!
 
-## Instructions (building the image)
+## Instructions (building the image) -- OLD NOT WORKING RIGHT NOW
  1. Install Docker
  2. Run Docker
  3. Set docker in Windows Container mode
