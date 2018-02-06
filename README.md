@@ -25,18 +25,9 @@ Messenger that uses autofac and RabbitMQ Event Queue with the Masstransit Framew
  10. Enter the username for rabbitmq, guest in this case
  11. Enter your username
  12. Start messaging!
-
-## Instructions (building the image) -- OLD NOT WORKING RIGHT NOW
- 1. Install Docker
- 2. Run Docker
- 3. Set docker in Windows Container mode
- 4. Open Windows Powershell (as Administrator)
- 5. CD to project folder
- 6. Execute command: "docker run -d -e RABBITMQ_ERLANG_COOKIE='SWQOKODSQALRPCLNMEQG' -p 15672:15672 -p 5672:5672 micdenny/rabbitmq-windows"
- //6. *Doesn't work with the latest Docker release. Run rabbitmq as a service or in a VM!* Execute command: "docker run -d --platform=linux --name rabbit1 -e RABBITMQ_ERLANG_COOKIE='SWQOKODSQALRPCLNMEQG' -e RABBITMQ_DEFAULT_USER=rabbitmq -e RABBITMQ_DEFAULT_PASS=rabbitmq -p 15672:15672 -p 5672:5672 rabbitmq:3-management"
- 7. CD to MessageProcessor folder that contains the Dockerfile
- 8. Execute command: "docker build -t messageprocessor ." (This might take a long time, it will download the microsoft/dotnet-framework:4.7.1 docker image)
- 9. Execute command : "docker run -d localhost rabbitmq rabbitmq"
- 10. Enter the RabbitMQ Server IP (localhost in this case)
- 11. Enter your username
- 12. Start messaging!
+ 
+ ## Version 1.1 Diagrams
+ Class diagram:
+ ![Class diagram](https://raw.githubusercontent.com/wijnandhonselaar/EventDrivenMessenger/master/Images/EventDrivenMessenger.png)
+ Sequence diagram:
+ ![Sequence diagram](https://raw.githubusercontent.com/wijnandhonselaar/EventDrivenMessenger/master/Images/Message%20life%20cycle.png)
