@@ -28,6 +28,6 @@ Messenger that uses autofac and RabbitMQ Event Queue with the Masstransit Framew
  
  ## Version 1.1 Diagrams
  Class diagram:
- ![Class diagram](https://raw.githubusercontent.com/wijnandhonselaar/EventDrivenMessenger/archive/v1.1/Images/EventDrivenMessenger.png)
+ ![Class diagram](https://raw.githubusercontent.com/wijnandhonselaar/EventDrivenMessenger/archive/V1.1/Images/EventDrivenMessenger.png)
  Sequence diagram:
- ![Sequence diagram](https://raw.githubusercontent.com/wijnandhonselaar/EventDrivenMessenger/archive/v1.1/Images/Message%20life%20cycle.png)
+ ![Sequence diagram](https://raw.githubusercontent.com/wijnandhonselaar/EventDrivenMessenger/archive/V1.1/Images/Message%20life%20cycle.png)
