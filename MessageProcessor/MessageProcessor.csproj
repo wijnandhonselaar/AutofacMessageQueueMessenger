@@ -35,11 +35,11 @@
     <Reference Include="GreenPipes, Version=1.2.1.98, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
       <HintPath>..\packages\GreenPipes.1.2.1\lib\net452\GreenPipes.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit, Version=4.0.1.1390, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\MassTransit.4.0.1\lib\net452\MassTransit.dll</HintPath>
+    <Reference Include="MassTransit, Version=4.1.0.1406, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\MassTransit.4.1.0.1406-develop\lib\net452\MassTransit.dll</HintPath>
     </Reference>
-    <Reference Include="MassTransit.RabbitMqTransport, Version=4.0.1.1390, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\MassTransit.RabbitMQ.4.0.1\lib\net452\MassTransit.RabbitMqTransport.dll</HintPath>
+    <Reference Include="MassTransit.RabbitMqTransport, Version=4.1.0.1406, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\MassTransit.RabbitMQ.4.1.0.1406-develop\lib\net452\MassTransit.RabbitMqTransport.dll</HintPath>
     </Reference>
     <Reference Include="MessengerPackage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\whonselaar.Message.EventTypes.1.0.0\lib\net462\MessengerPackage.dll</HintPath>
