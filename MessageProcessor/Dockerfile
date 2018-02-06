@@ -10,3 +10,4 @@ WORKDIR /app
 COPY bin/Release .
 
 ENTRYPOINT ["MessageProcessor.exe"]
+
