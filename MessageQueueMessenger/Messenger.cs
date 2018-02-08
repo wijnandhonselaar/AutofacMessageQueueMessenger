@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Autofac;
 using Services;
 using MassTransit;
@@ -59,6 +60,13 @@ namespace MessageQueueMessenger
                     break;
                 }
 
+                if ("bomb".Equals(message, StringComparison.OrdinalIgnoreCase))
+                {
+                    for (var i = 0; i < 50000; i++)
+                    {
+                        Publish(name, $"bomb + {i}");
+                    }
+                }
                 Publish(name, message);
             }
             while (true);
@@ -78,9 +86,9 @@ namespace MessageQueueMessenger
             }
         }
 
-        private static void Publish(string name, string message)
+        private static async Task Publish(string name, string message)
         {
-            BusControl.Publish<IUnprocessedMessage>(new
+            await BusControl.Publish<IUnprocessedMessage>(new
             {
                 Name = name,
                 Message = message

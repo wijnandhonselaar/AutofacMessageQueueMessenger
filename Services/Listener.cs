@@ -17,8 +17,9 @@ namespace Services
             if (ShowMessage(ctx.Message))
             {
                 ClearCurrentConsoleLine();
-                await Console.Out.WriteLineAsync(ctx.Message.Name + " - " + ctx.Message.Message);
-                Console.Write(Name + " - ");
+                Console.WriteLine(ctx.Message.Name + " - " + ctx.Message.Message);
+                Console.WriteLine(Name + " - ");
+//                Console.Out.WriteLineAsync(Name + " - ");
             }
         }
 
