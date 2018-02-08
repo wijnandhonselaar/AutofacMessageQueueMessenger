@@ -1,12 +1,10 @@
 ﻿version: "3"
 services:
-  web:
-    image: mp
+  messageprocessors:
+    image: messageprocessor
+    environment:
+      - 192.168.10.203 rabbitmq rabbitmq
     deploy:
       replicas: 2
       restart_policy:
         condition: on-failure
-    networks:
-      - webnet
-networks:
-  webnet:

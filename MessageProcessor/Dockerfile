@@ -2,8 +2,8 @@
 
 WORKDIR /app
 COPY . /app
-RUN nuget.exe restore MessageProcessor.csproj -SolutionDirectory ../ -Verbosity normal
-RUN MSBuild.exe MessageProcessor.csproj /t:build /p:Configuration=Release /p:OutputPath=./out
+RUN nuget.exe restore MessageProcessor.csproj -SolutionDirectory ../ -Verbosity quiet
+RUN MSBuild.exe MessageProcessor.csproj /t:build /p:Configuration=Release /p:OutputPath=./out /v:m
 
 FROM microsoft/dotnet-framework:4.7.1
 WORKDIR /app
