@@ -2,15 +2,11 @@
 
 WORKDIR /app
 COPY . /app
-
-RUN ["dotnet", "restore"]
-#Change output path from build to /app/out
-RUN ["dotnet", "build"]
+RUN nuget.exe restore MessageProcessor.csproj -SolutionDirectory ../ -Verbosity normal
+RUN MSBuild.exe MessageProcessor.csproj /t:build /p:Configuration=Release /p:OutputPath=./out
 
 FROM microsoft/dotnet-framework:4.7.1
 WORKDIR /app
-#Change from patch to build-env /app/out
-COPY --from=build-env /app .
+COPY --from=build-env app/out .
 
 ENTRYPOINT ["MessageProcessor.exe"]
-

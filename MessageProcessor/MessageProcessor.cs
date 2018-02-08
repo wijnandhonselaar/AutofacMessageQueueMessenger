@@ -11,11 +11,17 @@ namespace MessageProcessor
 
         static void Main(string[] args)
         {
-            _address = args[0];
-            _username = args[1];
-            _password = args[2];
+//            Console.WriteLine("Hello world!");
+//            Console.ReadLine();
+            Console.WriteLine(args[0]);
+            Console.WriteLine(args[1]);
+            Console.WriteLine(args[2]);
+            _address = args[0];//.Split(',')[0];
+            _username = args[1];//.Split(',')[1];//args[1];
+            _password = args[2];//.Split(',')[2]; //args[2];
             BusControl = ConfigureBus();
-            BusControl.StartAsync();
+            BusControl.Start();
+            Console.WriteLine(BusControl.Address.AbsoluteUri);
             Console.WriteLine("Message processor is running, press any key to exit");
             Console.ReadLine();
             BusControl.StopAsync();
