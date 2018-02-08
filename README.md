@@ -32,7 +32,7 @@ Messenger that uses autofac and RabbitMQ Event Queue with the Masstransit Framew
  ## Messageprocessor as a Service!
  To speed up the message processing you can use the docker service features. To make the change in performance visible you can open up the RabbitMQ management dashboard by going into the browser to: `IP_FROM_STEP_9:15672`. The following instructions will show you how:
  1. Stop the `messageprocessor` container
- 2. Execute command: `docker service create -t messageprocessor --name processors IP_FROM_STEP_9 guest guest`
+ 2. Execute command: `docker service create -t --name processors messageprocessor IP_FROM_STEP_9 guest guest`
  3. To scale up and down execute command: `docker service scale processors=5`
  
  ## Version 1.1 Diagrams
