@@ -12,16 +12,19 @@ Messenger that uses autofac and RabbitMQ Event Queue with the Masstransit Framew
  - Sending messages via a Message Bus
  - Client is .NET Framework 4.6.2 based
 
- ## Instructions (pulling the image)
+ ## Instructions
  1. Install Docker
  2. Run Docker
  3. Set docker in Windows Container mode
  4. Open Windows Powershell (as Administrator)
  5. CD to project folder
  6. Execute command: "docker run -d --name rabbitmq -e RABBITMQ_ERLANG_COOKIE='SWQOKODSQALRPCLNMEQG' -p 15672:15672 -p 5672:5672 micdenny/rabbitmq-windows"
- 7. Get the containers IP, execute: docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' rabbitmq
- 8. Execute command : "docker run -d whonselaar/messageprocessor:v1.0.1 IP_FROM_STEP_7 guest guest"
- 9. Enter the RabbitMQ Server IP (localhost in this case)
+ 7. CD to MessageProcessor folder
+ 8. Execute command "docker build -t messageprocessor ."
+ 9. Get the RabbitMQ IP, execute: docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' rabbitmq
+ 10. Execute command : "docker run -d messageprocessor IP_FROM_STEP_9 guest guest"
+ 11. Open the visual studio solution and pres F5 to run the chat-client
+ 9. Enter the RabbitMQ Server IP (IP_FROM_STEP_9)
  10. Enter the username for rabbitmq, guest in this case
  11. Enter your username
  12. Start messaging!
