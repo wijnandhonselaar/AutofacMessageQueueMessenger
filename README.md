@@ -20,7 +20,7 @@ Messenger that uses autofac and RabbitMQ Event Queue with the Masstransit Framew
  5. CD to project folder
  6. Execute command: `docker run -d --name rabbitmq -e RABBITMQ_ERLANG_COOKIE='SWQOKODSQALRPCLNMEQG' -p 15672:15672 -p 5672:5672 micdenny/rabbitmq-windows`
  7. CD to MessageProcessor folder
- 8. Execute command `docker build -t messageprocessor .`
+ 8. Execute command `docker build --rm -t messageprocessor .`
  9. Get the RabbitMQ IP, execute: `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' rabbitmq`
  10. Execute command : `docker run -d --name messageprocessor messageprocessor:latest IP_FROM_STEP_9 guest guest`
  11. Open the visual studio solution and pres F5 to run the chat-client
