@@ -1,16 +1,22 @@
 # AutofacMessageQueueMessenger
 Messenger that uses autofac and RabbitMQ Event Queue with the Masstransit Framework
 
+## Version 1.2
+### Updates
+ - Rabbitmq address, username and password are stored in a config file.
+  - This means they are not longer required to be set when starting the container. Like so:
+   `docker run -d --name messageprocessor messageprocessor:latest`
+
 ## Version 1.1
 ### Features
  - Messages are received by an Message Processor, which processes the message and sends it to all connected chat clients.
- - The Message Processor runs in a Docker container
- - Client is .NET Framework 4.6.2 based
+ - The Message Processor runs in a Docker container.
+ - Client is .NET Framework 4.6.2 based.
 
 ## Version 1.0
 ### Features
- - Sending messages via a Message Bus
- - Client is .NET Framework 4.6.2 based
+ - Sending messages via a Message Bus.
+ - Client is .NET Framework 4.6.2 based.
 
  ## Instructions
  1. Install Docker
