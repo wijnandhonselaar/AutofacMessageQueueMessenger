@@ -63,6 +63,7 @@
       <HintPath>..\packages\RabbitMQ.Client.5.0.1\lib\net451\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />

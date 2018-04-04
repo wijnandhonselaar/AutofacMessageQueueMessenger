@@ -12,15 +12,15 @@ namespace Services
         /**
          * Consume message from the Event Queue
          */
-        public static async Task Consume(ConsumeContext<IMessage> ctx)
+        public static Task Consume(ConsumeContext<IMessage> ctx)
         {
-            if (ShowMessage(ctx.Message))
-            {
-                ClearCurrentConsoleLine();
-                Console.WriteLine(ctx.Message.Name + " - " + ctx.Message.Message);
-                Console.WriteLine(Name + " - ");
-//                Console.Out.WriteLineAsync(Name + " - ");
-            }
+            if (!ShowMessage(ctx.Message)) return Task.CompletedTask;
+
+            ClearCurrentConsoleLine();
+            Console.WriteLine(ctx.Message.Name + " - " + ctx.Message.Message);
+            Console.Write(Name + " - ");
+
+            return Task.CompletedTask;
         }
 
         /**

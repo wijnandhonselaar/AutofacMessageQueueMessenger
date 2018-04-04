@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using MassTransit;
 using MessengerPackage;
 
@@ -7,13 +8,9 @@ namespace MessageProcessor
     public static class MessageProcessor
     {
         public static IBusControl BusControl { get; set; }
-        private static string _address, _username, _password;
 
         static void Main(string[] args)
         {
-            _address = args[0];
-            _username = args[1];
-            _password = args[2];
             BusControl = ConfigureBus();
             BusControl.Start();
             Console.WriteLine(BusControl.Address.AbsoluteUri);
@@ -27,13 +24,16 @@ namespace MessageProcessor
          */
         private static IBusControl ConfigureBus()
         {
+            string address = ConfigurationManager.AppSettings["RabbitMQHost"],
+                username = ConfigurationManager.AppSettings["RabbitMQHostUsername"],
+                password = ConfigurationManager.AppSettings["RabbitMQHostPassword"];
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
                 // Configure connection to RabbitMQ host 192.168.10.193
-                var host = cfg.Host(new Uri($"rabbitmq://{_address}"), h =>
+                var host = cfg.Host(new Uri($"rabbitmq://{address}"), h =>
                 {
-                    h.Username(_username);
-                    h.Password(_password);
+                    h.Username(username);
+                    h.Password(password);
                 });
 
                 // Setup listener

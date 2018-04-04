@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading.Tasks;
 using Autofac;
 using Services;
@@ -15,7 +16,6 @@ namespace MessageQueueMessenger
         static void Main(string[] args)
         {
             string name;
-            string username;
             // Using Autofac to autoinject classes
             var builder = new ContainerBuilder();
             // Register interface for autoinjection when ConsoleOuput is instantiated.
@@ -30,14 +30,10 @@ namespace MessageQueueMessenger
             // Connect to the RabbitMQ server
             do
             {
-                Console.WriteLine("Enter RabbitMQ Server IPAddress like so: 127.0.0.1");
-                var address = Console.ReadLine();
-                Console.WriteLine("Enter RabbitMQ Server username");
-                username = Console.ReadLine();
                 Console.WriteLine("Enter your name");
                 name = Console.ReadLine();
                 Console.WriteLine("Connecting to message bus...");
-                BusControl = ConfigureBus(username, name, address);
+                BusControl = ConfigureBus(name);
                 try
                 {
                     BusControl.Start();
@@ -98,8 +94,11 @@ namespace MessageQueueMessenger
         /**
          * Configure RabbitMQ Event Queue
          */
-        private static IBusControl ConfigureBus(string username, string name, string address)
+        private static IBusControl ConfigureBus(string name)
         {
+            string address = ConfigurationManager.AppSettings["RabbitMQHost"],
+                username = ConfigurationManager.AppSettings["RabbitMQHostUsername"],
+                password = ConfigurationManager.AppSettings["RabbitMQHostPassword"];
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
                 Listener.Name = name;
@@ -107,7 +106,7 @@ namespace MessageQueueMessenger
                 var host = cfg.Host(new Uri("rabbitmq://" + address), h =>
                 {
                     h.Username(username);
-                    h.Password(username);
+                    h.Password(password);
                 });
 
                 // Setup listener

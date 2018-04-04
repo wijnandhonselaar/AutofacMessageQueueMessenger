@@ -8,3 +8,7 @@ services:
       #replicas: 2
       restart_policy:
         condition: on-failure
+    networks:
+      - mynat
+networks:
+  mynat:
